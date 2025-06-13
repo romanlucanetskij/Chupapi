@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="mapstruct.extensions.spring.annotations" type="repository">
+    <properties maven-id="org.mapstruct.extensions.spring:mapstruct-spring-annotations:1.0.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mapstruct/extensions/spring/mapstruct-spring-annotations/1.0.0/mapstruct-spring-annotations-1.0.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.0.0.RELEASE/spring-core-5.0.0.RELEASE.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jcl/5.0.0.RELEASE/spring-jcl-5.0.0.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mapstruct/extensions/spring/mapstruct-spring-annotations/1.0.0/mapstruct-spring-annotations-1.0.0-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.0.0.RELEASE/spring-core-5.0.0.RELEASE-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jcl/5.0.0.RELEASE/spring-jcl-5.0.0.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

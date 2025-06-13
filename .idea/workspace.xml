@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="958edb7a-e119-40b1-9c07-b957693ec606" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2y6KlOXiLHlXZedLxqjv4R7a4Se" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.SecurityIntegrationTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "true",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.Practice1AntonovaYuliaApplication.executor": "Run",
+    "Spring Boot.courseworkLuchanetskyi.executor": "Run",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/HOME/Downloads/Romashka-20250612T085652Z-1-001/Romashka",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.54137933",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.SecurityIntegrationTest">
+    <configuration name="SecurityIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="courseworkLuchanetskyi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.courseworkLuchnetskyi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.courseworkLuchnetskyi" />
+      <option name="MAIN_CLASS_NAME" value="com.example.courseworkLuchnetskyi.SecurityIntegrationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="courseworkLuchanetskyi" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="courseworkLuchanetskyi" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.courseworkLuchnetskyi.courseworkLuchanetskyi" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SecurityIntegrationTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="958edb7a-e119-40b1-9c07-b957693ec606" name="Changes" comment="" />
+      <created>1749149733114</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749149733114</updated>
+      <workItem from="1749149734113" duration="518000" />
+      <workItem from="1749150264659" duration="408000" />
+      <workItem from="1749150681309" duration="994000" />
+      <workItem from="1749151683743" duration="650000" />
+      <workItem from="1749209481310" duration="1671000" />
+      <workItem from="1749214442528" duration="384000" />
+      <workItem from="1749214836272" duration="774000" />
+      <workItem from="1749215624069" duration="666000" />
+      <workItem from="1749216298975" duration="18000" />
+      <workItem from="1749216319040" duration="1849000" />
+      <workItem from="1749218189500" duration="1902000" />
+      <workItem from="1749648998097" duration="3834000" />
+      <workItem from="1749654743953" duration="8701000" />
+      <workItem from="1749668776911" duration="9330000" />
+      <workItem from="1749711754885" duration="4514000" />
+      <workItem from="1749718896026" duration="1808000" />
+      <workItem from="1749720911081" duration="656000" />
+      <workItem from="1749721625879" duration="6282000" />
+      <workItem from="1749729254681" duration="2497000" />
+      <workItem from="1749732572827" duration="1937000" />
+      <workItem from="1749795719534" duration="144000" />
+      <workItem from="1749795948743" duration="423000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
