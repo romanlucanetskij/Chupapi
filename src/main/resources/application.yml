@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://dpg-d15d887diees73ftu98g-a/romashkadb
+    username: user
+    password: xedIbRHtly6Xr9hOBCqoQJUAfGSR8Xie
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
