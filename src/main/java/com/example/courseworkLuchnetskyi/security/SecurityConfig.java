@@ -1,10 +1,8 @@
 package com.example.courseworkLuchnetskyi.security;
 
-import com.example.courseworkLuchnetskyi.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -19,9 +17,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
-@EnableMethodSecurity 
-@RequiredArgsConstructor 
+@EnableWebSecurity 
+@EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
@@ -42,7 +40,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
             .csrf(AbstractHttpConfigurer::disable)
 
@@ -50,10 +47,10 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                    "/auth/**",      
+                    "/auth/**",
                     "/v3/api-docs/**",
-                    "/swagger-ui/**", 
-                    "/actuator/health"   
+                    "/swagger-ui/**",
+                    "/actuator/health"
                 ).permitAll()
                 .anyRequest().authenticated()
             )
