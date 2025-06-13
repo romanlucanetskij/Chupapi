@@ -3,7 +3,7 @@ package com.example.courseworkLuchnetskyi.config;
 import com.example.courseworkLuchnetskyi.security.JwtAuthenticationFilter;
 import com.example.courseworkLuchnetskyi.service.UserDetailsService;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,55 +19,59 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-  @Autowired
-  private JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthFilter;
+    private final UserDetailsService userDetailsService;
 
-  @Autowired
-  private UserDetailsService userDetailsService;
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
 
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http
-      .csrf(csrf -> csrf.disable())
-      .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/auth/**").permitAll()
-        .requestMatchers("/api/tournaments/**").authenticated()
-        .requestMatchers("/api/teams/**").authenticated()
-        .requestMatchers("/api/players/**").authenticated()
-        .requestMatchers("/api/participations/**").authenticated()
-        .requestMatchers("/api/matches/**").authenticated()
-        .anyRequest().denyAll()
-      )
-      .logout(logout -> logout
-        .logoutSuccessUrl("/").permitAll()
-      )
-      .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-      .exceptionHandling(e -> e
-        .authenticationEntryPoint((request, response, authException) -> {
-          response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-        })
-      );;
+            // доступы
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers(
+                            "/",                    // если есть главная
+                            "/api/auth/**",
+                            "/actuator/**",
+                            "/v3/api-docs/**",
+                            "/swagger-ui/**"
+                    ).permitAll()
+                    .requestMatchers("/api/**").authenticated()
+                    .anyRequest().denyAll()
+            )
 
-    return http.build();
-  }
+            // логАут
+            .logout(l -> l.logoutSuccessUrl("/").permitAll())
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(); // за замовчуванням strength 10
-  }
+            // JWT фильтр ставим перед UsernamePasswordAuthenticationFilter
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 
-  @Bean
-  public AuthenticationProvider authenticationProvider() {
-    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    authProvider.setUserDetailsService(userDetailsService);
-    authProvider.setPasswordEncoder(passwordEncoder());
-    return authProvider;
-  }
+            // единая точка для 401
+            .exceptionHandling(e -> e.authenticationEntryPoint(
+                    (request, response, ex) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED)
+            ));
 
-  @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-    return config.getAuthenticationManager();
-  }
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider p = new DaoAuthenticationProvider();
+        p.setUserDetailsService(userDetailsService);
+        p.setPasswordEncoder(passwordEncoder());
+        return p;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration cfg) throws Exception {
+        return cfg.getAuthenticationManager();
+    }
 }
+
