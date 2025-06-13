@@ -8,7 +8,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://dpg-d15d887diees73ftu98g-a/romashkadb
+    url: jdbc:postgresql://dpg-d15d887diees73ftu98g-a.oregon-postgres.render.com:5432/romashkadb?sslmode=require
     username: user
     password: xedIbRHtly6Xr9hOBCqoQJUAfGSR8Xie
     driverClassName: org.postgresql.Driver
