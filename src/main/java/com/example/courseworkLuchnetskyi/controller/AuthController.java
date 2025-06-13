@@ -1,59 +1,97 @@
 package com.example.courseworkLuchnetskyi.controller;
 
+import com.example.courseworkLuchnetskyi.model.User;
+import com.example.courseworkLuchnetskyi.repository.UserRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.courseworkLuchnetskyi.config.JwtUtil;
 import com.example.courseworkLuchnetskyi.model.User;
 import com.example.courseworkLuchnetskyi.repository.UserRepository;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthenticationManager authManager;
-    private final UserRepository userRepo;
-    private final PasswordEncoder encoder;
-    private final JwtUtil jwt;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody AuthDto dto) {
-        if (userRepo.findByUsername(dto.username()).isPresent())
-            return ResponseEntity.badRequest().body("Username taken");
+    public ResponseEntity<?> register(@RequestBody Map<String, String> userData) {
+        String username = userData.get("username");
+        String password = userData.get("password");
 
-        userRepo.save(new User(dto.username(), encoder.encode(dto.password())));
-        return ResponseEntity.ok("Registered");
+        if (userRepository.findByUsername(username).isPresent()) {
+            return ResponseEntity.badRequest().body("Username is already taken");
+        }
+
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthDto dto,
-                                   HttpServletResponse resp) {
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData, HttpServletResponse response) {
+        String username = loginData.get("username");
+        String password = loginData.get("password");
 
-        authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(dto.username(), dto.password()));
+        System.out.println("Login attempt for username: " + username);
 
-        String token = jwt.generateToken(dto.username());
+        User user = userRepository.findByUsername(username)
+                .orElse(null);
 
-        resp.setHeader("Set-Cookie",
-                "JWT_TOKEN=" + token +
-                "; Path=/; Max-Age=" + 7 * 24 * 60 * 60 +
-                "; SameSite=None; Secure; HttpOnly");
+        if (user == null) {
+            System.out.println("User not found: " + username);
+            return ResponseEntity.status(401).body("Invalid username or password");
+        }
 
-        return ResponseEntity.ok("Login success");
+        System.out.println("User found: " + user.getUsername() + ", password hash: " + user.getPassword());
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            System.out.println("Password does not match for user: " + username);
+            return ResponseEntity.status(401).body("Invalid username or password");
+        }
+
+        String jwt = jwtUtil.generateToken(user.getUsername());
+
+        System.out.println("Generated JWT token for user: " + username);
+
+        Cookie cookie = new Cookie("JWT_TOKEN", jwt);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(7 * 24 * 60 * 60); 
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok("Login successful");
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletResponse resp) {
-        resp.setHeader("Set-Cookie",
-                "JWT_TOKEN=; Path=/; Max-Age=0; SameSite=None; Secure; HttpOnly");
-        return ResponseEntity.ok("Logout success");
-    }
+    public ResponseEntity<?> logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("JWT_TOKEN", null);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
 
-    /* ===== DTO ===== */
-    public record AuthDto(String username, String password) {}
+        return ResponseEntity.ok("Logout successful");
+    }
 }
